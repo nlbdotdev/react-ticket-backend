@@ -3,14 +3,16 @@ const Task = require("../model/Task");
 const createTask = async (req, res) => {
     try {
         console.log(req.body)
-        const { uid, title, status, priority } = req.body
+        const { uid, title, desc, status, severity, time_created, time_updated } = req.body
    
-
         let newTask = new Task({
             uid: uid,
             title: title,
+            desc: desc,
             status: status,
-            priority: priority,
+            severity: severity,
+            time_created: time_created,
+            time_updated: time_updated,
         })
 
         let savedTask = await newTask.save()
@@ -21,7 +23,7 @@ const createTask = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({ message: "Error", error: error })
+        res.status(500).json({ message: "Error", error: error.message })
     }
 }
 
