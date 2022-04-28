@@ -3,10 +3,14 @@ const Task = require("../model/Task");
 const createTask = async (req, res) => {
     try {
         console.log(req.body)
-        const { uid, title, desc, status, severity, time_created, time_updated } = req.body
+        
+        // should do time handling in backend too
+        const { title, desc, status, severity, time_created, time_updated } = req.body
+
+        const collectionLength = await Task.countDocuments() + 1
    
         let newTask = new Task({
-            uid: uid,
+            uid: collectionLength,
             title: title,
             desc: desc,
             status: status,
