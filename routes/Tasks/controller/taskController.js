@@ -6,7 +6,6 @@ const createTask = async (req, res) => {
         
         // should do time handling in backend too
         const { title, desc, status, severity, time_created, time_updated } = req.body
-
         const collectionLength = await Task.countDocuments() + 1
    
         let newTask = new Task({
