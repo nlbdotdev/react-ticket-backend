@@ -1,13 +1,26 @@
 const Task = require("../model/Task");
 
+const getAllTasks = async (req, res) => {
+
+    try {
+        let allTasks = await Task.find()
+        res.status(200).json(
+            allTasks
+        )
+    } catch (error) {
+        res.status(500).json({ message: "Error", error: error })
+    }
+
+}
+
 const createTask = async (req, res) => {
     try {
         console.log(req.body)
-        
+
         // should do time handling in backend too
         const { title, desc, status, severity, time_created, time_updated } = req.body
         const collectionLength = await Task.countDocuments() + 1
-   
+
         let newTask = new Task({
             uid: collectionLength,
             title: title,
@@ -26,24 +39,29 @@ const createTask = async (req, res) => {
         })
 
     } catch (error) {
-        res.status(500).json({ message: "Error", error: error.message })
+        res.status(500).json({ message: "Error", error: error })
     }
 }
 
-const getAllTasks = async (req, res) => {
+const updateTask = async (req, res) => {
 
     try {
-        let allTasks = await Task.find()
-        res.status(200).json(
-            allTasks
-        )
+        
+        const { id } = req.body
+        const taskObj = await Task.findById(id)
+
+        if (taskObj === null) throw { message: "Post not found" }
+
+        const updatedTask = await Task.findByIdAndUpdate(id, req.body, { new: true })
+        res.status(200).json({ Message: "Task has been updated", payload: updatedTask })
+
     } catch (error) {
         res.status(500).json({ message: "Error", error: error })
     }
-
 }
 
 module.exports = {
     createTask,
-    getAllTasks
+    getAllTasks,
+    updateTask,
 }
