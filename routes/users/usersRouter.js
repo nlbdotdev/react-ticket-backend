@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 const { createUser, userLogin, updateProfile } = require('./controller/usersController')
-const { checkIsEmpty, jwtMiddleware, validateCreateData, validateEmail, validateUpdateData } = require('../lib/authMiddleware/index')
+const { checkIsEmpty, jwtMiddleware, validateCreateData, validateEmail, validateUpdateData } = require('../lib/validationMiddleware/index')
 
 /* GET users listing. */
 router.get('/', function (req, res, next) {

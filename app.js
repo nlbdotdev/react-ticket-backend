@@ -8,6 +8,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 const tasksRouter = require('./routes/Tasks/tasksRouter')
+const usersRouter = require('./routes/Users/usersRouter')
 const mongoose = require("mongoose")
 
 mongoose.connect(process.env.MONGODB_URI)
@@ -34,6 +35,7 @@ app.use(cors())
 // Routes
 app.use('/', indexRouter);
 app.use('/tasks', tasksRouter);
+app.use('/users', usersRouter)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

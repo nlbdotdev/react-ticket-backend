@@ -20,11 +20,11 @@ const createUser = async (req, res) => {
 
         let savedUser = await newUser.save()
 
-        // res
-        //     .status(200)
-        //     .json({ message: "New user has been saved", payload: savedUser })
+        res
+            .status(200)
+            .json({ message: "New user has been saved", payload: savedUser })
 
-        res.redirect("/login-form")
+ 
 
     } catch (error) {
         console.log(error)
