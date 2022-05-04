@@ -46,11 +46,11 @@ const createTask = async (req, res) => {
 const updateTask = async (req, res) => {
 
     try {
-        
+
         const { id } = req.body
         const taskObj = await Task.findById(id)
 
-        if (taskObj === null) throw { message: "Post not found" }
+        if (taskObj === null) throw { message: "Task not found" }
 
         const updatedTask = await Task.findByIdAndUpdate(id, req.body, { new: true })
         res.status(200).json({ Message: "Task has been updated", payload: updatedTask })
