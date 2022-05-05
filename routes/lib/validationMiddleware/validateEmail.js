@@ -8,11 +8,11 @@ function validateEmail(req, res, next) {
     console.log(req.body.email)
 
     if (!isEmail(email)) {
-        errObj.password = "Email is invalid."
+        errObj.email = "Email is invalid."
     }
 
     if (Object.keys(errObj).length > 0) {
-        return res.status(500).json( { messag: "Error", error: errObj} )
+        return res.status(500).json( { messag: "error", error: errObj} )
     } else {
         next()
     }

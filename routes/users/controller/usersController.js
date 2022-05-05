@@ -5,6 +5,9 @@ const { errorHandler } = require('../utils/errorHandler');
 const { hashPassword } = require("../utils/userFunctions");
 
 const createUser = async (req, res) => {
+
+    console.log("Create User")
+
     try {
         const { firstName, lastName, username, email, password } = req.body
 
@@ -22,13 +25,13 @@ const createUser = async (req, res) => {
 
         res
             .status(200)
-            .json({ message: "New user has been saved", payload: savedUser })
+            .json({ message: "success", payload: savedUser })
 
  
 
     } catch (error) {
         console.log(error)
-        res.status(500).json({ error: errorHandler(error) })
+        res.status(500).json({ message: "error", error: errorHandler(error) })
     }
 }
 

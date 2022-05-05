@@ -1,11 +1,10 @@
 const parsedError = (err) => {
+    // ????
     let objKeys = Object.keys(err.keyValue)
     let objValue = Object.values(err.keyValue)
 
-    console.log(objKeys[0])
-    console.log(objValue[0])
-
-    return `${objKeys[0]}: ${objValue[0]} is already in use.`
+    // only works for one thing at a time
+    return { [objKeys[0]]: `${objValue[0]} is already in use.`}
 }
 
 const errorHandler = (err) => {
@@ -18,6 +17,7 @@ const errorHandler = (err) => {
 
     if (err.code) {
         switch (err.code) {
+            // duplicate key error
             case 11000:
                 message = parsedError(err)
                 break;
