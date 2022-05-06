@@ -7,8 +7,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-const tasksRouter = require('./routes/Tasks/tasksRouter')
-const usersRouter = require('./routes/Users/usersRouter')
+const tasksRouter = require('./routes/tasks/tasksRouter')
+const usersRouter = require('./routes/users/usersRouter')
 const mongoose = require("mongoose")
 
 mongoose.connect(process.env.MONGODB_URI)

@@ -9,6 +9,7 @@ router.get('/', function (req, res, next) {
 });
 
 router.post('/create-user', checkIsEmpty, validateCreateData, createUser)
+// Why is validate email in login, and not on create user?
 router.post('/login', validateEmail, userLogin)
 router.put('/update-profile', jwtMiddleware, checkIsEmpty, validateUpdateData, updateProfile)
 
