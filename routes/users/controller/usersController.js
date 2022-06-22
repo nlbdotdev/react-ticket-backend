@@ -2,7 +2,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken")
 const User = require("../model/User");
 const { userErrorHandler: errorHandler } = require('../utils/userErrorHandler');
-const { hashPassword } = require("../utils/userFunctions");
+const { hashPassword, getUserFromToken } = require("../utils/userFunctions");
 
 const createUser = async (req, res) => {
     try {
@@ -80,9 +80,18 @@ const userLogin = async (req, res) => {
     }
 };
 
+const getCurrentUser = async (req, res) => {
+    try {
+        const foundUser = await getUserFromToken(res.locals.decodedToken)
+        res.status(200).json({ message: "Current user", payload: foundUser });
+    } catch (error) {
+        res.status(500).json({ error: errorHandler(error) });
+    }
+}
 
 module.exports = {
     createUser,
     userLogin,
     updateProfile,
+    getCurrentUser,
 }
