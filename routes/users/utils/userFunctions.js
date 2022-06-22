@@ -1,3 +1,5 @@
+// consider moving to usersControllers
+
 const User = require('../model/User')
 const bcrypt = require("bcryptjs");
 
@@ -7,6 +9,7 @@ const hashPassword = async(password) => {
     return hashedPassword
 }
 
+// Currently not used
 const getUserFromToken = async(decodedToken) => {
     return await User.findOne({ email: decodedToken.email })
  }

@@ -1,12 +1,12 @@
-const {
-    isAlpha,
-    isAlphanumeric,
-    isStrongPassword,
-} = require('validator')
+const { isAlpha, isAlphanumeric, isStrongPassword} = require('validator')
 
-function validateUpdateData(req, res, next) {
+// Validate format of user properties
+function validateUserData(req, res, next) {
 
-    const { firstName, lastName, username, password, confirmPassword } = req.body
+    // console.log('Validate user data')
+    // console.log(req.body)
+
+    const { firstName, lastName, username, email, password } = req.body
     let errObj = {}
 
     if (!isAlpha(firstName)) {
@@ -18,25 +18,20 @@ function validateUpdateData(req, res, next) {
     }
 
     if (!isAlphanumeric(username)) {
-        errObj.password = "Username should not have special characters."
+        errObj.username = "Username should not have special characters."
     }
 
     if (!isStrongPassword(password)) {
         errObj.password = "Password is invalid, must contain: at least 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number, 1 special character."
     }
 
-    if (password !== confirmPassword) {
-        errObj.confirmPassword = "Password and confirm password do not match"
-    }
-
     if (Object.keys(errObj).length > 0) {
-        return res.status(500).json(errObj)
+        return res.status(500).json({ message: "error", error: errObj })
     } else {
-        console.log("Update Data Validated!")
         next()
     }
 }
 
 module.exports = {
-    validateUpdateData,
+    validateUserData,
 }
