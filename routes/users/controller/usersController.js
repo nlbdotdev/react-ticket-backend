@@ -1,9 +1,10 @@
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcryptjs")
 const jwt = require("jsonwebtoken")
-const User = require("../model/User");
-const { userErrorHandler: errorHandler } = require('../utils/userErrorHandler');
-const { hashPassword, getUserFromToken } = require("../utils/userFunctions");
+const User = require("../model/User")
+const { userErrorHandler: errorHandler } = require('../utils/userErrorHandler')
+const { hashPassword, getUserFromToken } = require("../utils/userFunctions")
 
+// Create new user
 const createUser = async (req, res) => {
     try {
         // Create user with body params and hashed password
@@ -26,6 +27,7 @@ const createUser = async (req, res) => {
     }
 }
 
+// Update current user with bearer token and req body
 const updateProfile = async (req, res) => {
 
     try {
@@ -48,6 +50,7 @@ const updateProfile = async (req, res) => {
     }
 }
 
+// Login with email and password
 const userLogin = async (req, res) => {
 
     try {
@@ -78,8 +81,9 @@ const userLogin = async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
-};
+}
 
+// Get current user from bearer token
 const getCurrentUser = async (req, res) => {
     try {
         const foundUser = await getUserFromToken(res.locals.decodedToken)
