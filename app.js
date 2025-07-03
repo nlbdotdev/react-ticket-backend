@@ -9,15 +9,10 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 const tasksRouter = require('./routes/tasks/tasksRouter')
 const usersRouter = require('./routes/users/usersRouter')
-const mongoose = require("mongoose")
+const { connectToDatabase } = require('./config/database')
 
-mongoose.connect(process.env.MONGODB_URI)
-.then(() => {
-console.log("CONNECTED TO MONGODB")
-})
-.catch((error) => {
-console.log("Error:", error)
-})
+// Initialize database connection
+connectToDatabase()
 
 var app = express();
 
