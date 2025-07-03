@@ -2,6 +2,14 @@
 
 A robust Node.js/Express.js backend API for a ticket management system with user authentication and task management capabilities.
 
+> **🚀 Recently Updated for Vercel Serverless Deployment**
+> 
+> This repository has been optimized for deployment on Vercel's serverless platform. If you want to run the Express app locally without serverless optimizations, please use the `express` branch instead.
+
+## 🔗 Related Projects
+
+- [React Ticket Frontend](https://github.com/your-username/react-ticket-frontend) - The frontend React application
+
 
 ## 🔗 Related Projects
 
