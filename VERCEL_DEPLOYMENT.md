@@ -64,8 +64,18 @@ This will start a local server that mimics Vercel's serverless environment.
 
 - **Database Connections**: The app uses connection pooling optimized for serverless environments
 - **Cold Starts**: First requests may be slower due to serverless cold starts
-- **Function Timeout**: Set to 30 seconds maximum (configurable in vercel.json)
+- **Function Timeout**: Set to 60 seconds maximum (configurable in vercel.json)
 - **Environment Variables**: Must be set in Vercel dashboard, not in .env files
+- **Connection Timeouts**: Optimized for faster serverless connections
+
+## Troubleshooting Timeout Issues
+
+If you encounter `FUNCTION_INVOCATION_TIMEOUT` errors:
+
+1. **Check the health endpoint**: Visit `/api/health` to test database connectivity
+2. **Verify environment variables**: Ensure all required variables are set correctly
+3. **Check Vercel logs**: Look for connection errors in the function logs
+4. **Database connection**: The app now uses faster timeouts optimized for serverless
 
 ## API Endpoints
 

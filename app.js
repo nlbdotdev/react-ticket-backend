@@ -11,8 +11,8 @@ const tasksRouter = require('./routes/tasks/tasksRouter')
 const usersRouter = require('./routes/users/usersRouter')
 const { connectToDatabase } = require('./config/database')
 
-// Initialize database connection
-connectToDatabase()
+// Initialize database connection - don't await here to avoid blocking
+connectToDatabase().catch(console.error)
 
 var app = express();
 

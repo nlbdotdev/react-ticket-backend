@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 // Connection options optimized for serverless
 const connectionOptions = {
-  maxPoolSize: 10,
-  serverSelectionTimeoutMS: 5000,
-  socketTimeoutMS: 45000,
+  maxPoolSize: 1, // Reduce pool size for serverless
+  serverSelectionTimeoutMS: 3000, // Faster timeout
+  socketTimeoutMS: 20000, // Faster socket timeout
+  connectTimeoutMS: 3000, // Faster connection timeout
   bufferCommands: false,
-  bufferMaxEntries: 0,
   useNewUrlParser: true,
   useUnifiedTopology: true,
 };
@@ -14,11 +14,17 @@ const connectionOptions = {
 let cachedConnection = null;
 
 async function connectToDatabase() {
-  if (cachedConnection) {
+  if (cachedConnection && mongoose.connection.readyState === 1) {
     return cachedConnection;
   }
 
   try {
+    // Close existing connection if it exists but is not ready
+    if (cachedConnection && mongoose.connection.readyState !== 1) {
+      await mongoose.disconnect();
+      cachedConnection = null;
+    }
+
     const connection = await mongoose.connect(process.env.MONGODB_URI, connectionOptions);
     console.log("CONNECTED TO MONGODB");
     cachedConnection = connection;
