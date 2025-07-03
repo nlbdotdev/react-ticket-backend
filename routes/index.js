@@ -6,6 +6,11 @@ router.get('/', function(req, res, next) {
   res.json({ message: 'Express API is running!' });
 });
 
+/* GET HTML page with favicon. */
+router.get('/html', function(req, res, next) {
+  res.render('index', { title: 'React Ticket Backend' });
+});
+
 /* GET health check. */
 router.get('/health', async function(req, res, next) {
   try {

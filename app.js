@@ -37,6 +37,11 @@ app.use('/api', indexRouter);
 app.use('/api/tasks', tasksRouter);
 app.use('/api/users', usersRouter)
 
+// Root route to show HTML with favicon
+app.get('/', function(req, res) {
+  res.render('index', { title: 'React Ticket Backend' });
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
