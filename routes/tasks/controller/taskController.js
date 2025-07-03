@@ -8,7 +8,8 @@ const getAllTasks = async (req, res) => {
             allTasks
         )
     } catch (error) {
-        res.status(500).json({ message: "Error", error: error })
+        console.error('getAllTasks error:', error);
+        res.status(500).json({ message: "Error", error: error.message || error })
     }
 
 }
